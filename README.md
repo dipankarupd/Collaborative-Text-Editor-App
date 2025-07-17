@@ -12,10 +12,13 @@ A real-time collaborative document editing Flutter web application built with mo
 
 **This is v1.0 of the application**. While the core functionality is working, there are minor bugs being actively fixed and new features being added regularly.
 
+## 🆕 What's New?
+
+**OAuth2 feature for google**. The latest version has the google sign in feature along with usual authentication.
+
 ## 🚀 Upcoming Features
 
 ### High Priority (Coming Soon)
-- **OAuth Google Login** - Seamless Google authentication
 - **Document Sharing** - Share documents with friends via URL
 - **Export Documents** - Download documents as Word/PDF files
 - **Offline Support** - Ability to work while offline, and later update changes when online
