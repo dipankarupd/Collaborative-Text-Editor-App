@@ -10,7 +10,7 @@ A real-time collaborative document editing Flutter web application built with mo
 
 ## 📢 Current Status
 
-**This is v1.0 of the application**. While the core functionality is working, there are minor bugs being actively fixed and new features being added regularly.
+**This is v1.1 of the application**. While the core functionality is working, there are minor bugs being actively fixed and new features being added regularly.
 
 ## 🆕 What's New?
 
