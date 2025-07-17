@@ -3,8 +3,8 @@ import 'package:app/features/auth/views/bloc/auth_bloc.dart';
 import 'package:app/features/auth/views/widgets/auth_button.dart';
 import 'package:app/features/auth/views/widgets/auth_text_field.dart';
 import 'package:app/features/auth/views/widgets/google_signin_button.dart';
+import 'package:app/utils/google_sign_in.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -182,7 +182,13 @@ class LoginPage extends StatelessWidget {
                             h: h * 0.07,
                             onPress: () async {
                               print('press');
-                              await _signinWithGoogle();
+                              final (name, email) = await signinWithGoogle();
+                              context.read<AuthBloc>().add(
+                                AuthLoginWithGoogleEvent(
+                                  name: name,
+                                  email: email,
+                                ),
+                              );
                             },
                           ),
                         ],
@@ -196,17 +202,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> _signinWithGoogle() async {
-    GoogleSignIn _signin = GoogleSignIn();
-
-    final res = await _signin.signIn();
-    if (res != null) {
-      print(res.displayName!);
-      print(res.email);
-    }
-    print(res);
-    print('here');
   }
 }

@@ -15,6 +15,11 @@ abstract interface class AuthRepo {
     required String password,
   });
 
+  Future<Either<Failure, AuthEntity>> signinWithGoogle({
+    required String name,
+    required String email,
+  });
+
   Future<Either<Failure, User>> getLoggedInUser();
 
   Future<Either<Failure, void>> logout();

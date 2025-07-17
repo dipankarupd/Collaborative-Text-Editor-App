@@ -14,6 +14,10 @@ abstract interface class AuthRemoteSource {
   });
 
   Future<AuthModel> login({required String email, required String password});
+  Future<AuthModel> signinWithGoogle({
+    required String name,
+    required String email,
+  });
 
   Future<User> currentUser();
   Future<void> logout();
@@ -210,6 +214,58 @@ class AuthRemoteSourceImpl implements AuthRemoteSource {
         e is AppException ? e.message : e.toString(),
       );
 
+      if (e is AppException) {
+        rethrow;
+      } else {
+        throw AppException(message: "Something went wrong");
+      }
+    }
+  }
+
+  @override
+  Future<AuthModel> signinWithGoogle({
+    required String name,
+    required String email,
+  }) async {
+    try {
+      final endpoint = AppEndpoints.Google_LOGIN;
+      final data = {
+        "name": name.isNotEmpty ? name : "No Name User",
+        "email": email,
+      };
+
+      LoggerUtils.logRequest("Google-Login", endpoint, data);
+
+      final res = await dio.post(
+        endpoint,
+        data: data,
+        options: Options(validateStatus: (status) => true),
+      );
+
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        LoggerUtils.logSuccess('Google-Login', res.statusCode, res.data);
+        final AuthModel authResponse = AuthModel.fromJson(
+          res.data as Map<String, dynamic>,
+        );
+
+        authLocalSource.setToken(
+          authResponse.accessToken,
+          authResponse.refreshToken,
+        );
+        return authResponse;
+      } else {
+        final msg =
+            (res.data is Map<String, dynamic> && res.data['error'] != null)
+                ? '${res.data['error'] as String}.'
+                : 'Something went wrong. Status code: ${res.statusCode}';
+
+        throw AppException(message: msg);
+      }
+    } catch (e) {
+      LoggerUtils.logError(
+        'Google-Login',
+        e is AppException ? e.message : e.toString(),
+      );
       if (e is AppException) {
         rethrow;
       } else {

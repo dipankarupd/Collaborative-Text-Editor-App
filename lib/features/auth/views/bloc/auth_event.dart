@@ -22,4 +22,11 @@ class AuthRegisterEvent extends AuthEvent {
   });
 }
 
+class AuthLoginWithGoogleEvent extends AuthEvent {
+  final String name;
+  final String email;
+
+  AuthLoginWithGoogleEvent({required this.name, required this.email});
+}
+
 class AuthIsLoggedInEvent extends AuthEvent {}

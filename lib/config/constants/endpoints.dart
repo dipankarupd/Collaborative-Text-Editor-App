@@ -3,6 +3,7 @@ import 'package:app/config/constants/app_constants.dart';
 abstract class AppEndpoints {
   // Auth:
   static const LOGIN = "${AppConstants.APP_URL}/users/login";
+  static const Google_LOGIN = "${AppConstants.APP_URL}/users/login/google";
   static const REGISTER = "${AppConstants.APP_URL}/users/register";
   static const ME = "${AppConstants.APP_URL}/users/me";
   static const REFRESH = "${AppConstants.APP_URL}/refresh";

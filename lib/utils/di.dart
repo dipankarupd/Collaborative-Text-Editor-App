@@ -1,9 +1,9 @@
-import 'package:app/client/ws_client.dart';
 import 'package:app/common/cubit/app_cubit_cubit.dart';
 import 'package:app/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:app/features/auth/data/source/auth_local_source.dart';
 import 'package:app/features/auth/data/source/auth_remote_source.dart';
 import 'package:app/features/auth/domain/repo/auth_repo.dart';
+import 'package:app/features/auth/domain/usecases/google_signin.dart';
 import 'package:app/features/auth/domain/usecases/login.dart';
 import 'package:app/features/auth/domain/usecases/logout.dart';
 import 'package:app/features/auth/domain/usecases/me.dart';
@@ -59,12 +59,16 @@ void _initAuth() {
     ..registerFactory<Register>(() => Register(repo: serviceLocator()))
     ..registerFactory<Me>(() => Me(repo: serviceLocator()))
     ..registerFactory<Logout>(() => Logout(repo: serviceLocator()))
+    ..registerFactory<SignInWithGoogle>(
+      () => SignInWithGoogle(repo: serviceLocator()),
+    )
     ..registerLazySingleton<AuthBloc>(
       () => AuthBloc(
         login: serviceLocator(),
         register: serviceLocator(),
         me: serviceLocator(),
         appCubitCubit: serviceLocator(),
+        signinWithGoogle: serviceLocator(),
       ),
     );
 }

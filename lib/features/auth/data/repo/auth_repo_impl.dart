@@ -60,4 +60,17 @@ class AuthRepoImpl implements AuthRepo {
       return left(Failure(msg: e.message.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, AuthEntity>> signinWithGoogle({
+    required String name,
+    required String email,
+  }) async {
+    try {
+      final res = await source.signinWithGoogle(name: name, email: email);
+      return right(res);
+    } on AppException catch (e) {
+      return left(Failure(msg: e.message.toString()));
+    }
+  }
 }
