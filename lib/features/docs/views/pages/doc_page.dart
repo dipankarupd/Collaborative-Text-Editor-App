@@ -6,6 +6,7 @@ import 'package:app/features/docs/views/widgets/app_logo.dart';
 import 'package:app/features/docs/views/widgets/create_new_doc_widget.dart';
 import 'package:app/features/docs/views/widgets/document_container.dart';
 import 'package:app/features/docs/views/widgets/error_fetching_doc.dart';
+import 'package:app/features/docs/views/widgets/open_link_widget.dart';
 import 'package:app/features/docs/views/widgets/user_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,14 +79,20 @@ class _DocPageState extends State<DocPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Collabs of ${user!.name}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
-                      fontStyle: FontStyle.italic,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Collabs of ${user!.name}',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      OpenLinkWidget(),
+                    ],
                   ),
                   SizedBox(height: 40),
                   Expanded(
