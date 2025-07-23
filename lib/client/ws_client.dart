@@ -22,7 +22,7 @@ class WebSocketService {
       // Match your Go server endpoint - remove the documentId from URL
       final uri = Uri.parse(
         '${AppConstants.APP_URL}/ws/$_documentId',
-      ).replace(scheme: 'ws');
+      ).replace(scheme: 'wss');
       final url = uri.toString();
       _channel = HtmlWebSocketChannel.connect(url);
       await _channel.ready;
